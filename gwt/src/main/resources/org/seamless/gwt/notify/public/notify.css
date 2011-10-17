@@ -1,0 +1,44 @@
+.sl-PopupNotification {
+    width: 25em;
+}
+
+.sl-PopupNotificationIconBusy {
+    margin-left: 0.5em;
+    margin-right: 1em;
+}
+
+.sl-PopupNotificationIconLevel{
+    margin-right: 1em;
+    height: 16px;
+    width: 16px;
+}
+
+.sl-PopupNotificationTitlePanel {
+    width: 100%;
+}
+
+.sl-PopupNotificationTitle {
+    margin: 0.3em;
+    font-weight: bold;
+}
+
+.sl-PopupNotificationCloseButton {
+    background: none !important;
+    border: none !important;
+    color: black !important;
+    font-size: 0.8em !important;
+}
+
+.sl-PopupNotificationCloseButton:hover {
+    color: gray !important;
+}
+
+.sl-PopupNotificationCloseButton:active {
+    background: none !important;
+    border: none !important;
+}
+
+.sl-PopupNotificationDetail{
+    margin-top: 0.3em;
+}
+

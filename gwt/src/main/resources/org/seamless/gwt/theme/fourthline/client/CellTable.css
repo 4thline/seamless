@@ -1,0 +1,97 @@
+/*
+ * Copyright (C) 2011 4th Line GmbH, Switzerland
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.cellTableWidget {
+    width: 100%;
+    cursor: pointer;
+}
+
+.cellTableFirstColumn {
+
+}
+
+.cellTableLastColumn {
+}
+
+.cellTableFooter, .cellTableHeader {
+    padding: 0.5em;
+    text-align: left;
+    color: #4b4a4a;
+    text-shadow: none;
+}
+
+.cellTableFooter {
+    border-top: 1px solid #a1a6ab;
+}
+
+.cellTableHeader {
+    border-bottom: 1px solid #a1a6ab;
+}
+
+.cellTableCell {
+    padding: 0.2em 0.5em;
+    font-size: small;
+    border: 0;
+}
+
+.cellTableFirstColumnFooter {
+    border-left: 0;
+}
+
+.cellTableFirstColumnHeader {
+    border-left: 0;
+}
+
+.cellTableLastColumnFooter {
+
+}
+
+.cellTableLastColumnHeader {
+
+}
+
+.cellTableEvenRow {
+    background-color: #f3f4f2;
+}
+
+.cellTableOddRow {
+    background-color: #e7e9eb;
+}
+
+.cellTableHoveredRow {
+    background-color: #d7e9b1;
+}
+
+.cellTableSelectedRow {
+    background-color: #8dbf21;
+    color: white;
+    height: auto;
+    overflow: auto;
+}
+
+.cellTableKeyboardSelectedRow {
+
+}
+
+.cellTableKeyboardSelectedCell {
+
+}
+
+@sprite .cellTableLoading {
+    gwt-image: 'cellTableLoading';
+    margin: 3px;
+}

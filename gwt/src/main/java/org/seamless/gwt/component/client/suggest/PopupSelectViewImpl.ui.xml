@@ -1,0 +1,26 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:w="urn:import:org.seamless.gwt.component.client.widget">
+
+    <ui:style>
+        .textBox {
+            width: 12.5em;
+            margin-right: 0.5em;
+        }
+
+        .button {
+            width: 7em;
+        }
+    </ui:style>
+
+    <g:HorizontalPanel borderWidth="0">
+        <g:cell verticalAlignment="top">
+            <w:GhostedTextBox ui:field="textBox" addStyleNames="sl-FormField {style.textBox}"/>
+        </g:cell>
+        <g:cell verticalAlignment="middle">
+            <g:Button ui:field="button" addStyleNames="sl-FormButton {style.button}">Show All</g:Button>
+        </g:cell>
+
+    </g:HorizontalPanel>
+
+</ui:UiBinder>

@@ -1,0 +1,40 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:w="urn:import:org.seamless.gwt.component.client.widget">
+
+    <ui:style>
+        .listBox {
+            width: 8em;
+        }
+        .textBox {
+            width: 7em;
+            margin-left: 0.5em;
+        }
+    </ui:style>
+
+    <g:HTMLPanel>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr>
+                <td>
+                    <g:ListBox
+                            ui:field="optionListBox"
+                            addStyleNames="sl-FormField {style.listBox}"
+                            multipleSelect="false"/>
+                </td>
+                <td>
+                    <w:AutocompleteDateTextBox ui:field="startDateBox"
+                                               visible="false"
+                                               defaultToday="false"
+                                               addStyleNames="sl-FormField {style.textBox}"/>
+                </td>
+                <td>
+                    <w:AutocompleteDateTextBox ui:field="endDateBox"
+                                               visible="false"
+                                               defaultToday="false"
+                                               addStyleNames="sl-FormField {style.textBox}"/>
+                </td>
+            </tr>
+        </table>
+    </g:HTMLPanel>
+
+</ui:UiBinder>
