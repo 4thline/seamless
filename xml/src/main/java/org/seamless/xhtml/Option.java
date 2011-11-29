@@ -43,16 +43,24 @@ public class Option {
 
             String[] fields = string.split(";");
             for (String field : fields) {
-
                 field = field.trim();
+                if (!field.contains(":")) continue;
+
                 String[] keyValues = field.split(":");
+                if (keyValues.length != 2) continue;
+
                 String key = keyValues[0].trim();
                 String[] values = keyValues[1].split(",");
-                for (int i = 0; i < values.length; i++) {
-                    values[i] = values[i].trim();
+                List<String> cleanValues = new ArrayList<String>();
+                for (String s : values) {
+                    String value = s.trim();
+                    if (value.length() > 0)
+                        cleanValues.add(value);
                 }
 
-                options.add(new Option(key, values));
+                options.add(
+                        new Option(key, cleanValues.toArray(new String[cleanValues.size()]))
+                );
             }
 
             return options.toArray(new Option[options.size()]);

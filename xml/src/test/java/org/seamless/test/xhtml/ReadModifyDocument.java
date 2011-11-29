@@ -19,6 +19,7 @@ package org.seamless.test.xhtml;
 
 import org.seamless.xhtml.Body;
 import org.seamless.xhtml.Head;
+import org.seamless.xhtml.Option;
 import org.seamless.xhtml.XHTML;
 import org.seamless.xhtml.XHTMLElement;
 import org.seamless.xhtml.XHTMLParser;
@@ -136,5 +137,34 @@ public class ReadModifyDocument {
         one.removeChild(one.findChildWithIdentifier("two"));
         assertEquals(one.getChildren().length, 1);
 
+    }
+
+    @Test
+    public void getOptions() throws Exception {
+        XHTMLParser parser = createParser();
+        XPath xpath = parser.createXPath();
+
+        XHTML doc = parser.parse(getClass().getResource("/org/seamless/test/xhtml/options.xhtml"), true);
+        Body body = doc.getRoot(xpath).getBody();
+
+        XHTMLElement element = body.findChildWithIdentifier("foo");
+        assertEquals(element.getOptions().length, 2);
+        assertEquals(element.getOption("foo").getKey(), "foo");
+        assertEquals(element.getOption("foo").getValues()[0], "one");
+        assertEquals(element.getOption("foo").getValues()[1], "two");
+        assertEquals(element.getOption("bar").getKey(), "bar");
+        assertEquals(element.getOption("bar").getValues()[0], "three");
+
+        element = body.findChildWithIdentifier("foo2");
+        assertEquals(element.getOptions().length, 2);
+        assertEquals(element.getOption("foo").getKey(), "foo");
+        assertEquals(element.getOption("foo").getValues()[0], "two");
+        assertEquals(element.getOption("bar").getKey(), "bar");
+        assertEquals(element.getOption("bar").getValues()[0], "three");
+
+        element = body.findChildWithIdentifier("foo3");
+        assertEquals(element.getOptions().length, 1);
+        assertEquals(element.getOption("bar").getKey(), "bar");
+        assertEquals(element.getOption("bar").getValues()[0], "three");
     }
 }
