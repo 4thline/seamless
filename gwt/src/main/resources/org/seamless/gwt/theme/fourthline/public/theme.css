@@ -17,14 +17,6 @@ NOTE: This file has been taken from gwt-user.jar in release 2.3.0 before modific
  *      property: rule applies to all versions of IE
  *    }
  */
-body, table td, select {
-    font-family: Tahoma, "Lucida Sans", Arial, Helvetica, sans-serif;
-}
-
-tt, code, pre {
-    font-family: "Andale Mono", Monaco, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
-}
-
 a, a:visited, a:hover {
     color: #78a31c;
 }
