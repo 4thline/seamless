@@ -28,6 +28,15 @@
 
         </plugins>
     </build>
+    
+    <dependencies>
+   		<!-- org.xmlpull.v1.* -->
+		<dependency>
+			<groupId>xpp3</groupId>
+			<artifactId>xpp3</artifactId>
+			<version>1.1.4c</version>
+		</dependency>
+	</dependencies>		
 
 
 </project>
