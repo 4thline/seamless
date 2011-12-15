@@ -70,6 +70,13 @@ public class XmlPullParserUtils {
 		}
 	}
 	
+	public static void skipTag(XmlPullParser xpp, String tag) throws IOException, XmlPullParserException {
+		int	event;
+		do {
+			event = xpp.next();
+		} while(event != XmlPullParser.END_DOCUMENT && (event != XmlPullParser.END_TAG || !xpp.getName().equals(tag)));
+	}
+	
 	static public void searchTag(XmlPullParser xpp, String tag) throws IOException, XmlPullParserException {
 		
 		int event;
@@ -132,5 +139,7 @@ public class XmlPullParserUtils {
     	
     	return fixedXml.toString();
     }
+
+	
 
 }
