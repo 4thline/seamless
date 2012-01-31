@@ -17,6 +17,8 @@
 
 package org.seamless.util.io;
 
+import java.nio.CharBuffer;
+
 /**
  * A Base64 Encoder/Decoder.
  * <p/>
@@ -143,9 +145,18 @@ public class Base64Coder {
      * @throws IllegalArgumentException if the input is not valid Base64 encoded data.
      */
     public static byte[] decode(char[] in) {
-        int iLen = in.length;
-        if (iLen % 4 != 0)
+    	
+    	char filteredIn[] = new char[in.length];
+    	int iLen = 0;
+    	for(char c : in) {
+    		if(c == '\r' || c == '\n') continue ;
+    		filteredIn[iLen++] = c;
+    	}
+    	if (iLen % 4 != 0)
             throw new IllegalArgumentException("Length of Base64 encoded input string is not a multiple of 4.");
+    	
+    	in = filteredIn;
+    	
         while (iLen > 0 && in[iLen - 1] == '=') iLen--;
         int oLen = (iLen * 3) / 4;
         byte[] out = new byte[oLen];
