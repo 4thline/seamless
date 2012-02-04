@@ -27,6 +27,7 @@ public class DateRange implements Serializable {
 
     public static enum Preset {
 
+        ALL(new DateRange(null)),
         YEAR_TO_DATE(new DateRange(new Date(getCurrentYear(), 0, 1))),
         MONTH_TO_DATE(new DateRange(new Date(getCurrentYear(), getCurrentMonth(), 1))),
         LAST_MONTH(getMonthOf(new Date(getCurrentYear(), getCurrentMonth() - 1, 1))),

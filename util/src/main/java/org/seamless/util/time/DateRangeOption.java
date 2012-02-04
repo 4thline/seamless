@@ -24,7 +24,7 @@ import java.io.Serializable;
  */
 public enum DateRangeOption implements Serializable {
 
-    ALL("All dates", null),
+    ALL("All dates", DateRange.Preset.ALL.getDateRange()),
     MONTH_TO_DATE("Month to date", DateRange.Preset.MONTH_TO_DATE.getDateRange()),
     YEAR_TO_DATE("Year to date", DateRange.Preset.YEAR_TO_DATE.getDateRange()),
     LAST_MONTH("Last month", DateRange.Preset.LAST_MONTH.getDateRange()),
