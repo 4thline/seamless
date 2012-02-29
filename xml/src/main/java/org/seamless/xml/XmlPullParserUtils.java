@@ -17,8 +17,11 @@
 
 package org.seamless.xml;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Logger;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -43,7 +46,13 @@ public class XmlPullParserUtils {
 
 	static public XmlPullParser createParser(String xml) throws XmlPullParserException {
 		XmlPullParser xpp = createParser();
-		xpp.setInput(new StringReader(xml));
+		InputStream is;
+		try {
+			is = new ByteArrayInputStream(xml.getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			throw new XmlPullParserException("UTF-8: unsupported encoding");
+		}
+		xpp.setInput(is, "UTF-8");
 		return xpp;
 	}
 	
