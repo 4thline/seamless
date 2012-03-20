@@ -90,7 +90,7 @@ public class XmlPullParserUtils {
 		
 		int event;
 		while((event = xpp.next()) != XmlPullParser.END_DOCUMENT) {
-			if(event == XmlPullParser.START_TAG  && !xpp.getName().equals(tag)) return ;
+			if(event == XmlPullParser.START_TAG  && xpp.getName().equals(tag)) return ;
 		}
 		
 		throw new IOException(String.format("tag '%s' not found", tag));
