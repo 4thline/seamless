@@ -143,6 +143,10 @@ public class XHTMLElement extends DOMElement<XHTMLElement, XHTMLElement> {
         return null;
     }
 
+    public Anchor[] findAllAnchors() {
+        return findAllAnchors(null, null);
+    }
+
     public Anchor[] findAllAnchors(String requiredScheme) {
         return findAllAnchors(requiredScheme, null);
     }
