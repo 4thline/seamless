@@ -36,6 +36,10 @@ public class NotifyEvent extends Event<NotifyEvent.Handler> {
     public NotifyEvent() {
     }
 
+    public NotifyEvent(String title, String detail) {
+        this(new Message(title, detail));
+    }
+
     public NotifyEvent(Message message) {
         this.message = message;
     }

@@ -6,7 +6,4 @@
     <inherits name="org.seamless.gwt.component.Component"/>
     <inherits name="org.seamless.gwt.notify.Notify"/>
     <inherits name="org.seamless.gwt.validation.Validation"/>
-
-    <entry-point class="org.seamless.gwt.client.AllEntryPoint"/>
-
 </module>

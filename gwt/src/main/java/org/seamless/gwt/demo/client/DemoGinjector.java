@@ -1,4 +1,4 @@
-package org.seamless.gwt.client;
+package org.seamless.gwt.demo.client;
 
 
 import com.google.gwt.inject.client.GinModules;
@@ -9,11 +9,11 @@ import org.seamless.gwt.notify.client.NotifyModule;
 
 @GinModules(
         {
-                AllModule.class,
+                DemoModule.class,
                 NotifyModule.class
         }
 )
-public interface AllGinjector extends Ginjector {
+public interface DemoGinjector extends Ginjector {
 
     Notifications getNotifications();
 

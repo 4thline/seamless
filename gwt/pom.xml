@@ -17,8 +17,7 @@
     <build>
         <plugins>
 
-            <!-- TODO: Compile GWT client for packaging - only for broken IntelliJ facet detection! -->
-            <!--
+            <!-- IntelliJ uses this to detect a GWT facet, for the demo module. -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
@@ -29,10 +28,13 @@
                         <goals>
                             <goal>compile</goal>
                         </goals>
+                        <configuration>
+                            <!-- Unless you want to deploy the demo module... -->
+                            <skip>true</skip>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
-            -->
 
         </plugins>
     </build>
