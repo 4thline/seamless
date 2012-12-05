@@ -49,7 +49,7 @@ public class MimeType {
                 }
             });
             for (Map.Entry<String, String> e : parameters.entrySet()) {
-                map.put(e.getKey().toLowerCase(), e.getValue());
+                map.put(e.getKey(), e.getValue());
             }
             this.parameters = Collections.unmodifiableMap(map);
         }
@@ -217,7 +217,7 @@ public class MimeType {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getType().toLowerCase()).append("/").append(getSubtype().toLowerCase());
+        sb.append(getType()).append("/").append(getSubtype());
         if (getParameters() != null || getParameters().size() > 0) {
             for (String name : getParameters().keySet()) {
                 sb.append(";").append(name).append("=\"").append(getParameters().get(name)).append("\"");
