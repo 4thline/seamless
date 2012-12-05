@@ -24,7 +24,12 @@ import static org.testng.Assert.assertEquals;
  * @author Christian Bauer
  */
 public class MimeTypeTest {
-
+    @Test
+    public void dontManipulateKeysAndValuesForSonyBRAVIAKDL_60EX700() {
+    	MimeType mime = new MimeType("video", "mpeg:DLNA.ORG_PN=MPEG_PS_NTSC;DLNA.ORG_OP=11");
+    	assertEquals(mime.toString(), "video/mpeg:DLNA.ORG_PN=MPEG_PS_NTSC;DLNA.ORG_OP=11");
+	}
+    
     @Test
     public void parseMimeTypeWithParameters() {
         String s = "audio/L16;rate=44100;id=\"ABC@host.com\";channels=1";
