@@ -19,19 +19,24 @@ package org.seamless.test.util;
 
 import org.seamless.util.MimeType;
 import org.testng.annotations.Test;
-import static org.testng.Assert.assertEquals;
+
+import static org.testng.Assert.*;
+
 /**
  * @author Christian Bauer
  */
 public class MimeTypeTest {
+
     @Test
-    public void dontManipulateKeysAndValuesForSonyBRAVIAKDL_60EX700() {
-    	MimeType mime = new MimeType("video", "mpeg:DLNA.ORG_PN=MPEG_PS_NTSC;DLNA.ORG_OP=11");
-    	assertEquals(mime.toString(), "video/mpeg:DLNA.ORG_PN=MPEG_PS_NTSC;DLNA.ORG_OP=11");
-	}
-    
+    public void caseInsensitiveEquality() {
+        assertEquals(new MimeType("foo", "bar"), new MimeType("Foo", "BAR"));
+        assertNotEquals(new MimeType("foo", "bar"), new MimeType("Foo", "BAZ"));
+        assertEquals(new MimeType("Foo", "Bar").toString(), "Foo/Bar");
+    }
+
     @Test
     public void parseMimeTypeWithParameters() {
+        // Note the missing quotes on the channels="1" value
         String s = "audio/L16;rate=44100;id=\"ABC@host.com\";channels=1";
         MimeType mt = MimeType.valueOf(s);
         assertEquals(mt.getType(), "audio");
@@ -41,6 +46,7 @@ public class MimeTypeTest {
         assertEquals(mt.getParameters().get("rate"), "44100");
         assertEquals(mt.getParameters().get("id"), "ABC@host.com");
         assertEquals(mt.getParameters().get("channels"), "1");
+        assertEquals(mt.toString(), "audio/L16;channels=\"1\";id=\"ABC@host.com\";rate=\"44100\"");
     }
 
     @Test
@@ -55,4 +61,14 @@ public class MimeTypeTest {
         assertEquals(mt.getSubtype(), "bar");
         assertEquals(mt.getParameters().size(), 1);
     }
+
+    @Test
+    public void escapeBackslash() {
+        MimeType mt = MimeType.valueOf("foo/bar ;baz=\"\\\"abc\\\"");
+        assertEquals(mt.getType(), "foo");
+        assertEquals(mt.getSubtype(), "bar");
+        assertEquals(mt.getParameters().size(), 1);
+        assertEquals(mt.getParameters().get("baz"), "\"abc\"");
+    }
+
 }

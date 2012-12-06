@@ -159,6 +159,8 @@ public class MimeType {
                     if (backslash) {
                         backslash = false;
                         buffer.append(c);
+                    } else {
+                        backslash = true;
                     }
                     break;
                 }
