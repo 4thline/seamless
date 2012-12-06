@@ -31,7 +31,7 @@
         </dependency>
 
         <dependency>
-        	<groupId>dbunit</groupId>
+        	<groupId>org.dbunit</groupId>
         	<artifactId>dbunit</artifactId>
         	<version>${dbunit.version}</version>
             <scope>provided</scope>
