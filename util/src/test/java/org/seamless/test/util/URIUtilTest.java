@@ -1,20 +1,17 @@
-/*
- * Copyright (C) 2011 4th Line GmbH, Switzerland
+ /*
+ * Copyright (C) 2012 4th Line GmbH, Switzerland
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as
- * published by the Free Software Foundation, either version 2 of
- * the License, or (at your option) any later version.
+ * The contents of this file are subject to the terms of either the GNU
+ * Lesser General Public License Version 2 or later ("LGPL") or the
+ * Common Development and Distribution License Version 1 or later
+ * ("CDDL") (collectively, the "License"). You may not use this file
+ * except in compliance with the License. See LICENSE.txt for more
+ * information.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
-
 package org.seamless.test.util;
 
 import org.seamless.util.URIUtil;
@@ -122,5 +119,13 @@ public class URIUtilTest {
                 URIUtil.createAbsoluteURL(baseURL, "asdf.txt").toString(),
                 "http://foo.bar/baz/asdf.txt"
         );
+    }
+
+    @Test
+    public void encoding() {
+        assertEquals(URIUtil.encodePathParamName("azAZ09-._~!$&'()*+,;=:@é/?#[]"), "azAZ09-._~!$&'()*+,%3B%3D:@%C3%A9%2F%3F%23%5B%5D");
+       	assertEquals(URIUtil.encodePathParamValue("azAZ09-._~!$&'()*+,;=:@é/?#[]"), "azAZ09-._~!$&'()*+,%3B=:@%C3%A9%2F%3F%23%5B%5D");
+       	assertEquals(URIUtil.encodePathSegment("azAZ09-._~!$&'()*+,;=:@é/?#[]"), "azAZ09-._~!$&'()*+,%3B=:@%C3%A9%2F%3F%23%5B%5D");
+       	assertEquals(URIUtil.encodeQueryNameOrValue("azAZ09-._~!$&'()*+,;=:@é/?#[]"), "azAZ09-._~!$%26'()*%2B,;%3D:@%C3%A9/?%23%5B%5D");
     }
 }

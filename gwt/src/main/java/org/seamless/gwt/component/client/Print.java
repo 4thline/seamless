@@ -1,7 +1,6 @@
-/* Copyright... I think this is public domain. */
-
-package org.seamless.gwt.component.client;
 /**
+ * https://groups.google.com/d/msg/Google-Web-Toolkit/7qSLr76O7WM/T-uC7SYLb2EJ
+ *
  * <pre>
  *
  * Description:
@@ -43,6 +42,7 @@ package org.seamless.gwt.component.client;
  *
  * </pre>
  */
+package org.seamless.gwt.component.client;
 
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;

@@ -28,8 +28,13 @@
 
     <licenses>
         <license>
-            <name>GNU Lesser General Public License, Version 2.1 or later</name>
+            <name>GNU Lesser General Public License, Version 2 or later</name>
             <url>http://www.gnu.org/licenses/lgpl-2.1.html</url>
+            <distribution>repo</distribution>
+        </license>
+        <license>
+            <name>Common Development and Distribution License, Version 1 or later</name>
+            <url>http://opensource.org/licenses/CDDL-1.0</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -64,6 +69,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>5</maven.compiler.source>
+        <maven.compiler.target>5</maven.compiler.target>
 
         <testng.version>6.2</testng.version>
         <servlet.api.version>2.4</servlet.api.version>

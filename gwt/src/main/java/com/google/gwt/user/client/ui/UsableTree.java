@@ -1,3 +1,18 @@
+/*
+ * Copyright 2007 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package com.google.gwt.user.client.ui;
 
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -6,13 +21,31 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/*
  * The GWT CellTree is unusable in 2.3 so we have to make Tree usable.
  * <p>
  * All glory to the <del>hypno toad</del>package visibility level!
  * </p>
  *
  * @author Christian Bauer
+ */
+/**
+ * A standard hierarchical tree widget. The tree contains a hierarchy of
+ * {@link com.google.gwt.user.client.ui.TreeItem TreeItems} that the user can
+ * open, close, and select.
+ * <p>
+ * <img class='gallery' src='Tree.png'/>
+ * </p>
+ * <h3>CSS Style Rules</h3>
+ * <ul class='css'>
+ * <li>.gwt-Tree { the tree itself }</li>
+ * <li>.gwt-Tree .gwt-TreeItem { a tree item }</li>
+ * <li>.gwt-Tree .gwt-TreeItem-selected { a selected tree item }</li>
+ * </ul>
+ * <p>
+ * <h3>Example</h3>
+ * {@example com.google.gwt.examples.TreeExample}
+ * </p>
  */
 public class UsableTree extends Tree {
 
