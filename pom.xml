@@ -19,6 +19,7 @@
         <module>javadoc</module>
         <module>swing</module>
         <module>gwt</module>
+        <module>cdi</module>
     </modules>
 
     <!-- ##################################################################################################### -->
@@ -80,6 +81,7 @@
         <hibernate.core.version>3.6.0.Final</hibernate.core.version>
         <javax.mail.version>1.4</javax.mail.version>
         <dbunit.version>2.2</dbunit.version>
+        <weld.version>1.1.10.Final</weld.version>
 
     </properties>
 
