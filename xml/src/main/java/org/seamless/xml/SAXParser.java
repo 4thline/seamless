@@ -21,6 +21,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
 
@@ -183,7 +184,7 @@ public class SAXParser {
         public void startElement(String uri, String localName, String qName,
                                  Attributes attributes) throws SAXException {
             this.characters = new StringBuilder();
-            this.attributes = attributes;
+            this.attributes = new AttributesImpl(attributes); // see http://docstore.mik.ua/orelly/xml/sax2/ch05_01.htm, section 5.1.1
             log.finer(getClass().getSimpleName() + " starting: " + localName);
         }
 
