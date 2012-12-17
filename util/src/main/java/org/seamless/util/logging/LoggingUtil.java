@@ -172,7 +172,8 @@ public class LoggingUtil {
             rootLogger.removeHandler(handler);
         }
         for (Handler handler : h) {
-            LogManager.getLogManager().getLogger("").addHandler(handler);
+            if (handler != null)
+                LogManager.getLogManager().getLogger("").addHandler(handler);
         }
     }
 }
