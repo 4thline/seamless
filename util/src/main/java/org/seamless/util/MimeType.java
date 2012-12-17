@@ -217,13 +217,17 @@ public class MimeType {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getType()).append("/").append(getSubtype());
+        sb.append(toStringNoParameters());
         if (getParameters() != null || getParameters().size() > 0) {
             for (String name : getParameters().keySet()) {
                 sb.append(";").append(name).append("=\"").append(getParameters().get(name)).append("\"");
             }
         }
         return sb.toString();
+    }
+
+    public String toStringNoParameters() {
+     	 return  getType() + "/" + getSubtype();
     }
 
 }
