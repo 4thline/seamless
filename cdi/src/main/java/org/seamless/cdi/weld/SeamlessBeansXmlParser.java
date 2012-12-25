@@ -95,8 +95,13 @@ public class SeamlessBeansXmlParser extends BeansXmlParser {
                 if (current < paths.length - 1) {
                     result = extractNestedFile(paths, current + 1, zipInputStream);
                 } else {
-                    result = new byte[new Long(entry.getSize()).intValue()];
-                    zipInputStream.read(result, 0, result.length);
+                    ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+                    int bytesRead;
+                    byte[] buffer = new byte[8192];
+                    while ((bytesRead = zipInputStream.read(buffer)) != -1) {
+                        outStream.write(buffer, 0, bytesRead);
+                    }
+                    result = outStream.toByteArray();
                 }
             }
             zipInputStream.closeEntry();
