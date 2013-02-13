@@ -85,6 +85,8 @@
         <weld.version>1.1.10.Final</weld.version>
         <kxml.version>2.3.0</kxml.version>
         <android.version>4.0.1.2</android.version>
+        <android.support.version>10</android.support.version>
+        <android.maven.plugin.version>3.5.0</android.maven.plugin.version>
 
     </properties>
 
@@ -116,7 +118,7 @@
 
         <pluginManagement>
             <plugins>
-                
+
                 <!-- Assembly -->
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
@@ -162,6 +164,27 @@
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>2.5</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.4</version>
                 </plugin>
 
             </plugins>
@@ -225,26 +248,28 @@
 
     <profiles>
         <profile>
-            <id>default-tools.jar</id>
+            <id>tools-default</id>
             <activation>
-                <property>
-                    <name>java.vendor</name>
-                    <!-- JDK 1.6
-                    <value>Sun Microsystems Inc.</value>
-                    -->
-                    <!-- OpenJDK 7 -->
-                    <value>Oracle Corporation</value>
-                </property>
+                <activeByDefault>true</activeByDefault>
+                <file>
+                    <exists>${java.home}/../lib/tools.jar</exists>
+                </file>
             </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.sun</groupId>
-                    <artifactId>tools</artifactId>
-                    <version>1.0</version> <!-- Doesn't matter -->
-                    <scope>system</scope>
-                    <systemPath>${java.home}/../lib/tools.jar</systemPath>
-                </dependency>
-            </dependencies>
+            <properties>
+                <tools.jar>${java.home}/../lib/tools.jar</tools.jar>
+            </properties>
+        </profile>
+        <profile>
+            <id>tools-osx-sundjdk</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <file>
+                    <exists>${java.home}/../Classes/classes.jar</exists>
+                </file>
+            </activation>
+            <properties>
+                <tools.jar>${java.home}/../Classes/classes.jar</tools.jar>
+            </properties>
         </profile>
     </profiles>
 

@@ -17,6 +17,14 @@
     <build>
         <plugins>
 
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
             <!-- IntelliJ uses this to detect a GWT facet, for the demo module. -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
