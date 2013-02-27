@@ -145,8 +145,16 @@ public class SeamlessWeldSEDeployment extends AbstractWeldSEDeployment {
         FileInputStream inputStream = null;
         try {
             inputStream = new FileInputStream(archiveFile);
+
+            String archivePath = archiveFile.getPath();
+
+            // Special handling of Windows paths
+            archivePath = archivePath.replaceAll("\\\\", "/");
+            if (!archivePath.startsWith("/"))
+                archivePath = "/" + archivePath;
+
             discoverResourcesInArchive(
-                archiveFile.getPath(),
+                archivePath,
                 inputStream,
                 discoveredClasses,
                 discoveredBeanXmlUrls
