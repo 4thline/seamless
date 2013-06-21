@@ -40,6 +40,7 @@ public class Headers implements Map<String, List<String>> {
     final static byte LF = 10;
 
     final Map<String, List<String>> map = new HashMap<String, List<String>>(32);
+    private boolean normalizeHeaders = true;
 
     public Headers() {
     }
@@ -49,8 +50,9 @@ public class Headers implements Map<String, List<String>> {
     }
 
     public Headers(ByteArrayInputStream inputStream) {
+        StringBuilder sb = new StringBuilder(256);
         Headers headers = new Headers();
-        String line = readLine(inputStream);
+        String line = readLine(sb, inputStream);
         String lastHeader = null;
         if (line.length() != 0) {
             do {
@@ -66,10 +68,15 @@ public class Headers implements Map<String, List<String>> {
                     lastHeader = header[0];
                 }
 
-                line = readLine(inputStream);
+                sb.delete(0, sb.length());
+                line = readLine(sb, inputStream);
             } while (line.length() != 0);
         }
         putAll(headers);
+    }
+
+    public Headers(boolean normalizeHeaders) {
+        this.normalizeHeaders = normalizeHeaders;
     }
 
     public int size() {
@@ -153,24 +160,34 @@ public class Headers implements Map<String, List<String>> {
     }
 
     private String normalize(String key) {
-        if (key == null) return null;
-        if (key.length() == 0) return key;
-        char[] b;
-        String s;
-        b = key.toCharArray();
-        if (b[0] >= 'a' && b[0] <= 'z') {
-            b[0] = (char) (b[0] - ('a' - 'A'));
-        }
-        for (int i = 1; i < key.length(); i++) {
-            if (b[i] >= 'A' && b[i] <= 'Z') {
-                b[i] = (char) (b[i] + ('a' - 'A'));
+        String result=key;
+        
+        if (normalizeHeaders) {
+            if (key == null) return null;
+            if (key.length() == 0) return key;
+            char[] b;
+            b = key.toCharArray();
+            final int caseDiff = 'a' - 'A';//android optimization
+            
+            if (b[0] >= 'a' && b[0] <= 'z') {
+                b[0] = (char) (b[0] - caseDiff);
             }
-        }
-        return new String(b);
+            int length = key.length();//android optimization
+            for (int i = 1; i < length;  i++) {
+                if (b[i] >= 'A' && b[i] <= 'Z') {
+                    b[i] = (char) (b[i] + caseDiff);
+                }
+            }
+            result = new String(b);
+        } 
+        return result;
+    }
+    
+    public static String readLine(ByteArrayInputStream is) {
+        return readLine(new StringBuilder(256), is);
     }
 
-    public static String readLine(ByteArrayInputStream is) {
-        StringBuilder sb = new StringBuilder(64);
+    public static String readLine(StringBuilder sb, ByteArrayInputStream is) {
         int nextByte;
         while((nextByte = is.read()) != -1) {
             char nextChar = (char) nextByte;
@@ -245,17 +262,16 @@ public class Headers implements Map<String, List<String>> {
 
     @Override
     public String toString() {
-        StringBuilder headerString = new StringBuilder();
+        StringBuilder headerString = new StringBuilder(512);
         for (Entry<String, List<String>> headerEntry : entrySet()) {
-            StringBuilder headerLine = new StringBuilder();
 
-            headerLine.append(headerEntry.getKey()).append(": ");
+            headerString.append(headerEntry.getKey()).append(": ");
 
             for (String v : headerEntry.getValue()) {
-                headerLine.append(v).append(",");
+                headerString.append(v).append(",");
             }
-            headerLine.delete(headerLine.length()-1, headerLine.length());
-            headerString.append(headerLine).append("\r\n");
+            headerString.delete(headerString.length()-1, headerString.length());
+            headerString.append("\r\n");
         }
         return headerString.toString();
     }
