@@ -104,8 +104,8 @@
         </dependency>
 
         <dependency>
-            <groupId>android.support</groupId>
-            <artifactId>compatibility-v13</artifactId>
+            <groupId>com.android.support</groupId>
+            <artifactId>support-v13</artifactId>
             <version>${android.support.version}</version>
         </dependency>
 
