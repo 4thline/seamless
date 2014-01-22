@@ -86,7 +86,7 @@
         <kxml.version>2.3.0</kxml.version>
         <android.version>4.0.1.2</android.version>
         <android.support.version>18.0.0</android.support.version>
-        <android.maven.plugin.version>3.6.1</android.maven.plugin.version>
+        <android.maven.plugin.version>3.8.2</android.maven.plugin.version>
 
     </properties>
 
