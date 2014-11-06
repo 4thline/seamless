@@ -9,7 +9,7 @@
     <groupId>org.seamless</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 
     <modules>
         <module>util</module>
@@ -20,7 +20,6 @@
         <module>swing</module>
         <module>gwt</module>
         <module>cdi</module>
-        <module>android</module>
     </modules>
 
     <!-- ##################################################################################################### -->
@@ -84,9 +83,6 @@
         <dbunit.version>2.2</dbunit.version>
         <weld.version>1.1.10.Final</weld.version>
         <kxml.version>2.3.0</kxml.version>
-        <android.version>4.0.1.2</android.version>
-        <android.support.version>18.0.0</android.support.version>
-        <android.maven.plugin.version>3.8.2</android.maven.plugin.version>
 
     </properties>
 
