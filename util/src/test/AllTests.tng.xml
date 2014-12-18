@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
-<suite name="AllTests - Util">
-    <test name="Util">
-        <packages>
-            <package name="org.seamless.test.util"/>
-        </packages>
-    </test>
-</suite>

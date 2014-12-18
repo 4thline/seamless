@@ -1,9 +1,0 @@
-<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0//EN"
-        "http://google-web-toolkit.googlecode.com/svn/releases/2.0/distro-source/core/src/gwt-module.dtd">
-
-<module>
-    <inherits name="org.seamless.util.I18n"/>
-    <inherits name="org.seamless.gwt.component.Component"/>
-    <inherits name="org.seamless.gwt.notify.Notify"/>
-    <inherits name="org.seamless.gwt.validation.Validation"/>
-</module>
