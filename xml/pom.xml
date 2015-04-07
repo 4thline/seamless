@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.seamless</groupId>
         <artifactId>parent</artifactId>
-        <version>1.1.0</version>
+        <version>1.1.1</version>
     </parent>
 
     <name>Seamless XML</name>
