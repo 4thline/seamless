@@ -122,7 +122,7 @@ public class SeamlessWeldSEDeployment extends AbstractWeldSEDeployment {
                 } else if ("jar".equals(resourceURL.getProtocol())) {
 
                     File archiveFile =
-                        new File(URI.create(resourcePath.substring(0, resourcePath.indexOf("!"))));
+                        new File(URI.create(resourcePath.substring(0, resourcePath.indexOf("!")).replace(" ", "%20")));
                     discoverResourcesInArchive(archiveFile, discoveredClasses, discoveredBeanXmlUrls);
 
                 } else {
@@ -189,7 +189,7 @@ public class SeamlessWeldSEDeployment extends AbstractWeldSEDeployment {
                 classesInArchive.add(toClassName(entry.getName()));
             } else if (entry.getName().endsWith(BEANS_XML)) {
                 archiveHasBeansXml = true;
-                discoveredBeanXmlUrls.add(URI.create("jar:file:" + entryPath).toURL());
+                discoveredBeanXmlUrls.add(URI.create("jar:file:" + entryPath.replace(" ", "%20")).toURL());
             } else if (isArchive(entry.getName())) {
                 discoverResourcesInArchive(entryPath, zipInputStream, discoveredClasses, discoveredBeanXmlUrls);
             }
@@ -232,8 +232,8 @@ public class SeamlessWeldSEDeployment extends AbstractWeldSEDeployment {
     protected String toClassName(String path) {
         // Turn the file path into a fully qualified class name
         return path
-            .substring(0, path.lastIndexOf(".class"))
-            .replace('\\', '.').replace('/', '.');
+                .substring(0, path.lastIndexOf(".class"))
+                .replace('\\', '.').replace('/', '.');
     }
 
     protected boolean isArchive(String name) {
