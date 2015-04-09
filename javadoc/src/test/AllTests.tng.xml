@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="AllTests - Javadoc">
+    <test name="Javadoc">
+        <packages>
+            <package name="org.seamless.test.javadoc"/>
+        </packages>
+    </test>
+</suite>

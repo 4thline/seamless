@@ -1,32 +1,35 @@
- /*
- * Copyright (C) 2012 4th Line GmbH, Switzerland
- *
- * The contents of this file are subject to the terms of either the GNU
- * Lesser General Public License Version 2 or later ("LGPL") or the
- * Common Development and Distribution License Version 1 or later
- * ("CDDL") (collectively, the "License"). You may not use this file
- * except in compliance with the License. See LICENSE.txt for more
- * information.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- */
+/*
+* Copyright (C) 2012 4th Line GmbH, Switzerland
+*
+* The contents of this file are subject to the terms of either the GNU
+* Lesser General Public License Version 2 or later ("LGPL") or the
+* Common Development and Distribution License Version 1 or later
+* ("CDDL") (collectively, the "License"). You may not use this file
+* except in compliance with the License. See LICENSE.txt for more
+* information.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
 package org.seamless.javadoc;
 
-import com.sun.javadoc.RootDoc;
 import com.sun.javadoc.ClassDoc;
+import com.sun.javadoc.RootDoc;
 import com.sun.tools.javac.util.Context;
+import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.ListBuffer;
 import com.sun.tools.javac.util.Options;
 import com.sun.tools.javadoc.JavadocTool;
 import com.sun.tools.javadoc.ModifierFilter;
 import com.sun.tools.javadoc.PublicMessager;
 
+import javax.tools.JavaFileObject;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.logging.Level;
@@ -78,7 +81,7 @@ public class EasyDoclet {
     }
 
     public EasyDoclet(String locale, File sourceDirectory, String[] packageNames, File[] fileNames) {
-        this(locale, new File[] {sourceDirectory}, packageNames, fileNames);
+        this(locale, new File[]{sourceDirectory}, packageNames, fileNames);
     }
 
     public EasyDoclet(String locale, File[] sourceDirectories, String[] packageNames, File[] fileNames) {
@@ -94,7 +97,7 @@ public class EasyDoclet {
             sb.append(File.pathSeparatorChar);
         }
         if (sb.length() > 0)
-            sb.deleteCharAt(sb.length()-1);
+            sb.deleteCharAt(sb.length() - 1);
 
         log.fine("Using source path: " + sb.toString());
         compOpts.put("-sourcepath", sb.toString());
@@ -122,26 +125,75 @@ public class EasyDoclet {
         JavadocTool javadocTool = JavadocTool.make0(context);
 
         try {
-            rootDoc = javadocTool.getRootDocImpl(
-                    locale,
-                    null,
-                    new ModifierFilter(ModifierFilter.ALL_ACCESS),
-                    javaNames.toList(),
-                    new ListBuffer<String[]>().toList(),
-                    false,
-                    subPackages.toList(),
-                    new ListBuffer<String>().toList(),
-                    false,
-                    false,
-                    false);
+            rootDoc = getDynamicRootDoc(javadocTool, locale, new ModifierFilter(ModifierFilter.ALL_ACCESS),
+                    javaNames.toList(), subPackages.toList());
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
 
         if (log.isLoggable(Level.FINEST)) {
             for (ClassDoc classDoc : getRootDoc().classes()) {
-                log.finest("Parsed Javadoc class source: " + classDoc.position() + " with inline tags: " + classDoc.inlineTags().length );
+                log.finest("Parsed Javadoc class source: " + classDoc.position() + " with inline tags: " + classDoc.inlineTags().length);
             }
+        }
+    }
+
+    private RootDoc getDynamicRootDoc(final JavadocTool javadocTool, final String locale, final ModifierFilter modifierFilter, final List<String> javaNames, final List<String> subPackages) throws Exception {
+        String version = Runtime.class.getPackage().getImplementationVersion();
+        if (version.startsWith("1.8")) {
+            Method m = javadocTool.getClass().getMethod("getRootDocImpl",
+                    String.class,
+                    String.class,
+                    com.sun.tools.javadoc.ModifierFilter.class,
+                    com.sun.tools.javac.util.List.class,
+                    com.sun.tools.javac.util.List.class,
+                    java.lang.Iterable.class,
+                    boolean.class,
+                    com.sun.tools.javac.util.List.class,
+                    com.sun.tools.javac.util.List.class,
+                    boolean.class,
+                    boolean.class,
+                    boolean.class);
+
+            return (RootDoc) m.invoke(javadocTool,
+                    locale,
+                    null,
+                    new ModifierFilter(ModifierFilter.ALL_ACCESS),
+                    javaNames,
+                    new ListBuffer<String[]>().toList(),
+                    new ListBuffer<JavaFileObject>().toList(),
+                    false,
+                    subPackages,
+                    new ListBuffer<String>().toList(),
+                    false,
+                    false,
+                    false);
+        } else {
+            Method m = javadocTool.getClass().getMethod("getRootDocImpl",
+                    String.class,
+                    String.class,
+                    ModifierFilter.class,
+                    com.sun.tools.javac.util.List.class,
+                    com.sun.tools.javac.util.List.class,
+                    boolean.class,
+                    com.sun.tools.javac.util.List.class,
+                    com.sun.tools.javac.util.List.class,
+                    boolean.class,
+                    boolean.class,
+                    boolean.class);
+
+            return (RootDoc) m.invoke(javadocTool,
+                    locale,
+                    null,
+                    new ModifierFilter(ModifierFilter.ALL_ACCESS),
+                    javaNames,
+                    new ListBuffer<String[]>().toList(),
+                    false,
+                    subPackages,
+                    new ListBuffer<String>().toList(),
+                    false,
+                    false,
+                    false);
         }
     }
 
@@ -172,8 +224,11 @@ public class EasyDoclet {
                 log.log(level, s);
         }
 
-        public void flush() throws IOException {}
-        public void close() throws IOException {}
+        public void flush() throws IOException {
+        }
+
+        public void close() throws IOException {
+        }
     }
 
     protected String getApplicationName() {
