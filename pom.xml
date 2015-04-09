@@ -9,7 +9,7 @@
     <groupId>org.seamless</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.1.1</version>
+    <version>1.1.2-SNAPSHOT</version>
 
     <modules>
         <module>util</module>
