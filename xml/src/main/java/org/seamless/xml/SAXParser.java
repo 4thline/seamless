@@ -65,16 +65,23 @@ public class SAXParser {
 
     protected XMLReader create() {
         try {
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+
+            // Configure factory to prevent XXE attacks
+            factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+            factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            factory.setXIncludeAware(false);
+
+            factory.setNamespaceAware(true);
+
             if (getSchemaSources() != null) {
-                // Jump through all the hoops and create a validating reader
-                SAXParserFactory factory = SAXParserFactory.newInstance();
-                factory.setNamespaceAware(true);
                 factory.setSchema(createSchema(getSchemaSources()));
-                XMLReader xmlReader = factory.newSAXParser().getXMLReader();
-                xmlReader.setErrorHandler(getErrorHandler());
-                return xmlReader;
             }
-            return XMLReaderFactory.createXMLReader();
+
+            XMLReader xmlReader = factory.newSAXParser().getXMLReader();
+            xmlReader.setErrorHandler(getErrorHandler());
+            return xmlReader;
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }

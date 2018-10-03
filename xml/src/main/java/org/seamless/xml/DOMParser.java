@@ -136,6 +136,15 @@ public abstract class DOMParser<D extends DOM> implements ErrorHandler, EntityRe
                 factory.setFeature("http://apache.org/xml/features/xinclude/fixup-base-uris", false);
                 factory.setFeature("http://apache.org/xml/features/xinclude/fixup-language", false);
 
+                // Configure parser to prevent XXE attacks
+                factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+                factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+                factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+                factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+                factory.setXIncludeAware(false);
+                factory.setExpandEntityReferences(false);
+
+
                 // Good idea to set a schema when you want to validate! Tell me, how does it work
                 // without a schema?!
                 factory.setSchema(getSchema());
