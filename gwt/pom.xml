@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.seamless</groupId>
         <artifactId>parent</artifactId>
-        <version>1.1.2-SNAPSHOT</version>
+        <version>1.1.2</version>
     </parent>
 
     <name>Seamless GWT</name>
@@ -42,6 +42,14 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
             </plugin>
 
         </plugins>
