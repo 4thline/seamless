@@ -62,7 +62,7 @@
     <distributionManagement>
         <repository>
             <id>4thline.org</id>
-            <url>scpexe://4thline.org/webroot/vhosts/8080/4thline.org/m2/</url>
+            <url>scpexe://4thline/data/website/docroot/m2/</url>
         </repository>
     </distributionManagement>
 
@@ -204,12 +204,11 @@
 
         </plugins>
 
-        <!-- Required for we-don't-care-about-compatibility-Maven3 'deploy' goal -->
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh-external</artifactId>
-                <version>1.0-beta-7</version>
+                <version>3.2.0</version>
             </extension>
         </extensions>
 
